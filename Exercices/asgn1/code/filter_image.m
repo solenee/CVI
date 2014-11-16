@@ -5,5 +5,7 @@ function [imgx, imgy] = filter_image(img, dx, dy)
     imgy = [];
     
 %   YOUR CODE GOES HERE
+    imgx = imfilter(img, dx, 'replicate', 'conv');
+    imgy = imfilter(img, dy, 'replicate', 'conv');
 
 end

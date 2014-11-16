@@ -4,6 +4,6 @@ function cartesian_points = hom2cart(homogeneous_points)
     cartesian_points = [];
     
 %   YOUR CODE GOES HERE
-    
-
+    n = size(homogeneous_points);
+    %cartesian_points
 end

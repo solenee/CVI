@@ -4,7 +4,11 @@ function Rz = get_rotation_z(theta_z)
     Rz = [];
 
 %   YOUR CODE GOES HERE
-    
+    angleRad = (pi*theta_z)/180;
+    Rz = [cos(theta_z), -sin(theta_z), 0, 0;
+          sin(theta_z), cos(theta_z), 0, 0;
+          0, 0, 1, 0;
+          0, 0, 0, 1];
     
 end
     

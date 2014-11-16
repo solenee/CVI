@@ -5,7 +5,7 @@ function img = make_image(red, green, blue)
     assert(isfloat(red) & isfloat(green) & isfloat(blue), ...
         'The color channels should be floating values between 0 and 1.');
 
-    img = [];
+    img = cat(3, red, green, blue);
     
 %   YOUR CODE GOES HERE
 

@@ -4,6 +4,5 @@ function points = load_points(filename)
     points = [];
     
 %   YOUR CODE GOES HERE
-
-    
+    points = load(filename);
 end

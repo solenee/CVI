@@ -4,7 +4,7 @@ function img = load_image(filename)
     img = [];
     
 %   YOUR CODE GOES HERE
-
+    img = double(imread(filename))/256;
 
 %   checks
     assert(isfloat(img) & min(img(:)) >= 0 & max(img(:)) <= 1, ...

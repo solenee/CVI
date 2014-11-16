@@ -5,5 +5,11 @@ function [dx, dy] = create_filters()
     dy = [];
     
 %   YOUR CODE GOES HERE
-
+    % Sobel filters as in the course
+    dx = (1/8)*[1, 0, -1;
+        2, 0, -2;
+        1, 0, -1];
+    dy = (1/8)*[1, 2, 1;
+        0, 0, 0;
+        -1, -2, -1];
 end

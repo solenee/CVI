@@ -4,6 +4,9 @@ function P = get_projection(principal_point, focal_length)
     P = [];
     
 %    YOUR CODE GOES HERE
-
+% don't know if it's right %%%%%%%%%%%
+    P = [focal_length, 0, principal_point(1), 0;
+         0, focal_length, principal_point(2), 0;
+         0, 0, 1, 0];
 
 end

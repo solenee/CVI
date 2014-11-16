@@ -9,7 +9,8 @@ img = load_image('../data/a1p3.png');
 
 display_images(imgx, imgy);
 
-threshold = 0; % YOU SHOULD PICK A BETTER ONE
+threshold = 0.05; % YOU SHOULD PICK A BETTER ONE
+% this threshold provides good edges on each side of the castle
 edges = detect_edges(imgx, imgy, threshold);
 
 edges2 = nonmaxsupp(edges, imgx, imgy);

@@ -1,0 +1,9 @@
+What is the difference between the top (coarsest) level of Gaussian and Laplacian pyramids?
+
+>
+
+Try various amplification factors for both levels and choose those that lead to good or interesting results.
+You may find that the image noise gets amplified if you scale up the coefficients of the finest sub-band too much;
+try to avoid that. Briefly explain your findings.
+
+>

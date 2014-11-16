@@ -4,7 +4,8 @@ function T = get_translation(t)
     T = [];
 
 %   YOUR CODE GOES HERE
-
+    T = eye(4);
+    T(1:3, 4) = t;
     
 end
     

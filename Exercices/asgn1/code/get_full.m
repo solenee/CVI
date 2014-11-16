@@ -5,5 +5,5 @@ function [P, M] = get_full(T, Rx, Ry, Rz, V)
     M = [];
     
 %    YOUR CODE GOES HERE
-    
+    P = V*T*Rx*Ry*Rz;
 end

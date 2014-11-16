@@ -4,7 +4,11 @@ function Ry = get_rotation_y(theta_y)
     Ry = [];
 
 %   YOUR CODE GOES HERE
-    
+    angleRad = (pi*theta_y)/180;
+    Ry = [cos(theta_y), 0, sin(theta_y), 0;
+          0, 1, 0, 0;
+          -sin(theta_y), 0, cos(theta_y), 0;
+          0, 0, 0, 1];
     
 end
     
