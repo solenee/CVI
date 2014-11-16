@@ -12,10 +12,17 @@ function [data, facedim, nfaces] = load_faces(fdir)
    facedim    2D face image dimensions [rows,cols]
    nfaces     number of all face images
 %}
-
+files = dir(fdir);
+nfaces = length(files);
+%% load images
+img = [];
+for (i=1:nfaces)
+  img[i] = load_image(files[i]);
+end
+facedim = size(img[1]);
 data = ;
-facedim = ;
-nfaces = ;
+
+
 
 % format check
 assert(isfloat(data) && 0 <= min(data(:)) && max(data(:)) <= 1);
