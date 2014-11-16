@@ -1,7 +1,9 @@
 %% Problem 2 - PCA for Face Images
 
 %% 1) Load the images
-[data,facedim,nfaces] = load_faces('../../data/yale_faces/yaleBs01');
+[data,facedim,nfaces] = load_faces('../../data/yale_faces');
+%% verification OK
+%display_image(data,facedim,nfaces);
 
 %% 2) Get the principal components by calling compute_pca
 
