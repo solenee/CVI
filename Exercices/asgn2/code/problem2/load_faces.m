@@ -13,24 +13,47 @@ function [data, facedim, nfaces] = load_faces(fdir)
    nfaces     number of all face images
 %}
 
-files = dir(sprintf('%s//*.pgm',fdir))
-%disp(sprintf('%s//*.pgm',fdir))
-%disp(files);
-%size(files)
-nfaces = length(files(:,1))
-%disp(files)
-%% load images
+%% load pgm files
+%{files = dir(sprintf('%s//*', fdir)); %.pgm',fdir));
+%nfaces = length(files(:,1));
+%}
+nfaces = 0;
+data = [];
+facedim = [];
+
+% Load images from all repertories except . and ..
+reps = dir(sprintf('%s//*',fdir));
+for (i=3:length(reps(:,1)))
+  rep = reps(i).name;
+  if (reps(i).isdir)
+     %disp(rep)
+     files = dir(sprintf('%s//%s//*.pgm', fdir, rep));
+     for ( i=1:length(files(:,1)) )
+       img = [];
+       %disp(files(i).name)
+       img = load_image(sprintf('%s//%s//%s',fdir, rep, files(i).name));
+       nfaces = nfaces+1;
+       data(:,nfaces) = img(:);
+     end
+  end
+end
+%{
+%% load images directly in one directory
 img = [];
+data = [];
 for (i=1:nfaces)
   img = [];
   disp(files(i).name)
-  disp(sprintf('%s//%s',fdir, files(i).name))
-  img = load_image(sprintf('%s//%s',fdir, files(i).name));
+  %disp(sprintf('%s//%s',fdir, files(i).name))
+  %img = load_image(sprintf('%s//%s',fdir, files(i).name));
   data(:,i) = img(:);
 end
+%}
 facedim = size(img);
+
 
 
 % format check
 assert(isfloat(data) && 0 <= min(data(:)) && max(data(:)) <= 1);
-assert(size(data) == [facedim(1)*facedim(2); nfaces]);
+dataSize = size(data);
+assert(dataSize(1) == facedim(1)*facedim(2) && dataSize(2) == nfaces);
