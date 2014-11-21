@@ -14,8 +14,24 @@ function [dx2,dy2,dxdy] = compute_tensor(img,sigma,fsize)
    dxdy     dx*dy
 %}
 
-dx2   = ;
-dy2   = ;
-dxdy  = ;
+% 1. At first, smooth the grayscale image
+imgSmooth = imfilter(img, fspecial('gaussian', fsize, sigma), 'replicate');
+%imshow(imgSmooth);
 
+% 2. Compute derivatives
+
+%% central difference : dx ~ 0.5*[1 0 -1]
+dx = imfilter(img, 0.5*[1 0 -1], 'replicate') ; size(dx);
+%% central difference : dy ~ 0.5*[1; 0; -1]
+dy = imfilter(img, 0.5*[1; 0; -1], 'replicate'); size(dy);
+
+dx2   = dx*dx'; size(dx2);
+dy2   = dy*dy'; size(dy2);
+dxdy  = dx*dy'; size(dxdy);
+
+%% 3. Smooth with Gaussian filter
+gFilter = fspecial('gaussian', fsize, 1.6*sigma);
+dx2   = imfilter(dx2, gFilter, 'replicate');
+dy2   = imfilter(dy2, gFilter, 'replicate');
+dxdy  = imfilter(dxdy, gFilter, 'replicate');
 

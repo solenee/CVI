@@ -10,9 +10,10 @@ function [im,imrgb] = load_image(filename)
    im           grayscale image
    imrgb        rgb image
 %}
-
-im =
-imrgb =
+ 
+I = imread(filename);
+imrgb = double(I)/256;
+im = rgb2gray(imrgb);
 
 assert(isfloat(im) & min(im(:)) >= 0 & max(im(:)) <= 1, ...
     'The image values should be floating point numbers between 0 and 1.');
