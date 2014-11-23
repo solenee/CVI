@@ -15,13 +15,16 @@ subplot(2,1,2), imshow(imrgb);
 [dx2,dy2,dxdy] = compute_tensor(im, sigma_0, fsize);
 
 %% 3a) Compute Harris function values with compute_harris
-harris = compute_harris(dx2,dy2,dxdy,sigma_0);
+harris = compute_harris(dx2, dy2, dxdy, sigma_0);
 
 %% 3b) Display the Harris image (Note: read doc for imshow and imagesc)
 figure,
 subplot(2,1,1), imshow (harris);
 subplot(2,1,2), imagesc(harris);
+
 %% 4a) Obtain the x and y coordinates of remaining points after non maximum suppression
 %%     and thresholding.
+[px,py] = nonmaxsupp(harris, harris_th);
 
 %% 4b) Display the points on top of the rgb image
+%use plot(·, ·,’x’)

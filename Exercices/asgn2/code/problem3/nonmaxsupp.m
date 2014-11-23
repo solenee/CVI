@@ -13,7 +13,14 @@ function [px,py] = nonmaxsupp(harris,thresh)
    py      y-coordinates for obtained points
 %}
 
-px =
-py =
+r = 2;
 
-
+px = [];
+py = [];
+for x=r+1:length(harris(1,:))
+   for y=r+1:length(harris(:,1))
+	window = harris(x-r:x+r, y-r:y+r);
+	[max, maxId] = max(window);
+	px = concat(1, maxId(1)-x+r, px);
+   end
+end
