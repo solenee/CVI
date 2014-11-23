@@ -7,24 +7,31 @@ fsize = 25; % filter size
 
 %% 1) Load the image with load_image
 [im,imrgb] = load_image('../../data/a2p3.png');
+%{
 figure,
 subplot(2,1,1), imshow (im);
 subplot(2,1,2), imshow(imrgb);
+%}
 
 %% 2) Calculate the structure tensor with compute_tensor
 [dx2,dy2,dxdy] = compute_tensor(im, sigma_0, fsize);
 
 %% 3a) Compute Harris function values with compute_harris
 harris = compute_harris(dx2, dy2, dxdy, sigma_0);
+min_harris = min(harris(:))
+max_harris = max(harris(:))
 
 %% 3b) Display the Harris image (Note: read doc for imshow and imagesc)
 figure,
-subplot(2,1,1), imshow (harris);
-subplot(2,1,2), imagesc(harris);
+imagesc(harris)
 
 %% 4a) Obtain the x and y coordinates of remaining points after non maximum suppression
 %%     and thresholding.
 [px,py] = nonmaxsupp(harris, harris_th);
 
 %% 4b) Display the points on top of the rgb image
-%use plot(·, ·,’x’)
+figure,
+imshow(imrgb)
+hold on 
+plot(px, py,'rx')
+hold off

@@ -13,7 +13,16 @@ function [px,py] = nonmaxsupp(harris,thresh)
    py      y-coordinates for obtained points
 %}
 
+% select interest points
+[ipx, ipy] = find(harris>thresh);
+% TO DELETE
+px = ipx; py= ipy;
+
+% TODO thinnen the results
+%{
 r = 2;
+
+nbPoints = 0;
 
 px = [];
 py = [];
@@ -24,3 +33,9 @@ for x=r+1:length(harris(1,:))
 	px = concat(1, maxId(1)-x+r, px);
    end
 end
+nbPoints
+%}
+assert(length(px(:,1)) == length(py(:,1)) && length(px(1,:)) == length(py(1,:)), ...
+    'px and py should have the same size.');
+
+
