@@ -18,8 +18,7 @@ subplot(2,1,2), imshow(imrgb);
 
 %% 3a) Compute Harris function values with compute_harris
 harris = compute_harris(dx2, dy2, dxdy, sigma_0);
-min_harris = min(harris(:))
-max_harris = max(harris(:))
+sprintf('Harris function takes values between %d and %d', min(harris(:)),max(harris(:)))
 
 %% 3b) Display the Harris image (Note: read doc for imshow and imagesc)
 figure,
@@ -27,11 +26,11 @@ imagesc(harris)
 
 %% 4a) Obtain the x and y coordinates of remaining points after non maximum suppression
 %%     and thresholding.
-[px,py] = nonmaxsupp(harris, harris_th);
+[px,py] = nonmaxsupp(harris, harris_th); %give a relevant number with harris_th = 1e-3
 
 %% 4b) Display the points on top of the rgb image
 figure,
 imshow(imrgb)
 hold on 
-plot(px, py,'rx')
+plot(py, px,'yx')
 hold off

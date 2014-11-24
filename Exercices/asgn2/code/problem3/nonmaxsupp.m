@@ -15,51 +15,34 @@ function [px,py] = nonmaxsupp(harris,thresh)
 
 % select interest points
 [ipx, ipy] = find(harris>thresh);
-% TO DELETE
-%px = ipx; py= ipy;
+sprintf('Number of interest points for the given threshold : %d', length(ipx))
 
-% TODO thinnen the results
+% thinnen the results
 px = []; py = [];
 nbPoints = 0;
-% for each window not sticking to the borders
-x = 6; y = 6;
-while (x < (length(harris(1,:) - 5) )
-  while(y < (length(harris(:,1)) - 5) )
-%for x=6:length(harris(1,:))
-%   for y=6:length(harris(:,1))
-   
+[rws, cls] = size(harris);
+% for each window not sticking to the borders, ...
+x = 6; %y = 6;
+while ( (x < (rws - 5)) )
+  y = 6;
+  while ( (y < (cls - 5)) )
+
 %% find the maximum
     window = harris(x:x+4, y:y+4);
-    [value, indice] =  max(window);
+    [value, indice] =  max(window(:));
     if (value > thresh)
 %%% take it
-	nbPoints += 1;
- 	px(nbPoints) = x + fix((indice(1)-1)/5);
-	py(nbPoints) = y + mod(indice(1)-1, 5);
+	nbPoints = nbPoints + 1;
+ 	px(nbPoints) = x + mod(indice(1)-1, 5); %fix((indice(1)-1)/5)
+	py(nbPoints) = y + fix((indice(1)-1)/5); %mod(indice(1)-1, 5)
 %% else    
 %%% skip it
     end
-    x += 5;
-    y += 5;
+    y = y + 5;
   end
+  x = x + 5;
 end
-
-%{
-r = 2;
-
-nbPoints = 0;
-
-px = [];
-py = [];
-for x=r+1:length(harris(1,:))
-   for y=r+1:length(harris(:,1))
-	window = harris(x-r:x+r, y-r:y+r);
-	[max, maxId] = max(window);
-	px = concat(1, maxId(1)-x+r, px);
-   end
-end
-nbPoints
-%}
+sprintf('Number of interest points after non-maximum suppression : %d', nbPoints)
 
 assert(length(px(:,1)) == length(py(:,1)) && length(px(1,:)) == length(py(1,:)), ...
     'px and py should have the same size.');
