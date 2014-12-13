@@ -12,11 +12,11 @@ function [im,imrgb] = load_image(filename)
 %}
  
 I = imread(filename);
-imrgb = double(I)/256;
+imrgb = im2double(I);%/256;
 im = rgb2gray(imrgb);
 
 assert(isfloat(im) & min(im(:)) >= 0 & max(im(:)) <= 1, ...
     'The image values should be floating point numbers between 0 and 1.');
-assert(isfloat(imrgb) & min(imrgb(:)) >= 0 & max(imrgb(:)) <= 1, ...
-    'The image values should be floating point numbers between 0 and 1.');
+%assert(isfloat(imrgb) & min(imrgb(:)) >= 0 & max(imrgb(:)) <= 1, ...
+%    'The image values should be floating point numbers between 0 and 1.');
 

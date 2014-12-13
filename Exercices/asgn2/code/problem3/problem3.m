@@ -26,11 +26,11 @@ imagesc(harris)
 
 %% 4a) Obtain the x and y coordinates of remaining points after non maximum suppression
 %%     and thresholding.
-[px,py] = nonmaxsupp(harris, harris_th); %give a relevant number with harris_th = 1e-3
+[px,py] = nonmaxsupp_correction(harris, harris_th); %give a relevant number with harris_th = 1e-3
 
 %% 4b) Display the points on top of the rgb image
 figure,
 imshow(imrgb)
 hold on 
-plot(py, px,'yx')
+plot(px, py,'yx')
 hold off

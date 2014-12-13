@@ -19,10 +19,10 @@ imgSmooth = imfilter(img, fspecial('gaussian', fsize, sigma), 'replicate');
 
 % 2. Compute derivatives
 
-%% central difference : dx ~ 0.5*[1 0 -1]
-dx = imfilter(img, 0.5*[1 0 -1], 'replicate') ; 
-%% central difference : dy ~ 0.5*[1; 0; -1]
-dy = imfilter(img, 0.5*[1; 0; -1], 'replicate');
+%% central difference : dx ~ 0.5*[-1 0 1]
+dx = imfilter(img, [-0.5 0 0.5], 'replicate') ; 
+%% central difference : dy ~ 0.5*[-1; 0; 1]
+dy = imfilter(img, [-0.5; 0; 0.5], 'replicate');
 
 dx2   = dx.*dx; 
 dy2   = dy.*dy; 
